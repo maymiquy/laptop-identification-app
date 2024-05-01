@@ -6,11 +6,18 @@ use App\Models\Gejala;
 use App\Models\Aturan;
 use App\Models\Kerusakan;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Str;
 
 class KonsultasiController extends Controller
 {
     public function index(): Response
     {
+        Session::forget('informasi_konsultasi');
+
         return Inertia::render('Dashboard/Konsultasi/Index', [
             'data_konsultasi' => Konsultasi::latest()
         ]);
@@ -69,8 +76,13 @@ class KonsultasiController extends Controller
         } else {
             $informasiKonsultasi = Session::get('informasi_konsultasi');
             $kerusakan = Kerusakan::where('kode_kerusakan', $validatedData['next'])->first();
-            $informasiKonsultasi['kerusakan_id'] = $kerusakan->id;
+
+            $informasiKonsultasi['kerusakan_id'] = $kerusakan ? $kerusakan->id : null;
+            $informasiKonsultasi['uuid'] = Str::uuid()->toString();
+
             $konsultasi = Konsultasi::create($informasiKonsultasi);
+
+            Session::forget('informasi_konsultasi');
 
             // return redirect('/konsultasi/hasil/' . $konsultasi->uuid);
             return Redirect::route('konsultasi.result', [
