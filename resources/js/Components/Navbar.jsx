@@ -6,33 +6,95 @@ import ResponsiveNavLink from "./ResponsiveNavLink";
 import { useState } from "react";
 
 export default function Navbar(props) {
-    const { name, email } = props;
+    const { onClick, name, email, isShow } = props;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+    const menuLink = [
+        {
+            title: "Dasboard",
+            link: "dashboard",
+        },
+        {
+            title: "Gejala",
+            link: "gejala.index",
+        },
+        {
+            title: "Kerusakan",
+            link: "gejala.store",
+        },
+        {
+            title: "OS",
+            link: "gejala.create",
+        },
+        {
+            title: "Aturan",
+            link: "gejala.create",
+        },
+    ];
+
     return (
         <nav className="bg-white border-b border-gray-100">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 md:px-3">
                 <div className="flex justify-between h-16">
-                    <div className="flex">
-                        <div className="shrink-0 flex items-center">
-                            <Link href="/">
-                                <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
-                            </Link>
-                        </div>
-
-                        <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <NavLink
-                                href={route("dashboard")}
-                                active={route().current("dashboard")}
+                    <div className="shrink-0 flex gap-10 items-center">
+                        <div className="-me-2 md:flex items-center hidden">
+                            <button
+                                onClick={onClick}
+                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                             >
-                                Dashboard
-                            </NavLink>
+                                <svg
+                                    className="h-6 w-6"
+                                    stroke="currentColor"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        className={
+                                            !showingNavigationDropdown
+                                                ? "inline-flex"
+                                                : "hidden"
+                                        }
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                    <path
+                                        className={
+                                            showingNavigationDropdown
+                                                ? "inline-flex"
+                                                : "hidden"
+                                        }
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
                         </div>
+                        <Link href="/" className="flex md:hidden">
+                            <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                        </Link>
                     </div>
-
-                    <div className="hidden sm:flex sm:items-center sm:ms-6">
+                    <div
+                        className={`hidden justify-self-center space-x-8 md:-my-px md:ms-10 md:${
+                            isShow === true ? "flex" : "hidden"
+                        }`}
+                    >
+                        {menuLink.map((items, index) => (
+                            <NavLink
+                                key={index}
+                                href={route(items.link)}
+                                active={route().current(items.link)}
+                            >
+                                {items.title}
+                            </NavLink>
+                        ))}
+                    </div>
+                    <div className="hidden md:flex md:items-center md:ms-6">
                         <div className="ms-3 relative">
                             <Dropdown>
                                 <Dropdown.Trigger>
@@ -71,15 +133,14 @@ export default function Navbar(props) {
                             </Dropdown>
                         </div>
                     </div>
-
-                    <div className="-me-2 flex items-center sm:hidden">
+                    <div className="-me-2 flex items-center md:hidden">
                         <button
                             onClick={() =>
                                 setShowingNavigationDropdown(
                                     (previousState) => !previousState
                                 )
                             }
-                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                            className="inline-flex items-center justify-center p-2 rounded-md text-gray-800 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                         >
                             <svg
                                 className="h-6 w-6"
@@ -118,16 +179,19 @@ export default function Navbar(props) {
             <div
                 className={
                     (showingNavigationDropdown ? "block" : "hidden") +
-                    " sm:hidden"
+                    " md:hidden"
                 }
             >
                 <div className="pt-2 pb-3 space-y-1">
-                    <ResponsiveNavLink
-                        href={route("dashboard")}
-                        active={route().current("dashboard")}
-                    >
-                        Dashboard
-                    </ResponsiveNavLink>
+                    {menuLink.map((items, index) => (
+                        <ResponsiveNavLink
+                            key={index}
+                            href={route(items.link)}
+                            active={route().current(items.link)}
+                        >
+                            {items.title}
+                        </ResponsiveNavLink>
+                    ))}
                 </div>
 
                 <div className="pt-4 pb-1 border-t border-gray-200">

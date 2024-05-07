@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
     // Route::get('/gejala', [GejalaController::class, 'index'])->name('gejala.index');
     // Route::get('/gejala/create', [GejalaController::class, 'create'])->name('gejala.create');
     // Route::post('/gejala', [GejalaController::class, 'store'])->name('gejala.store');
@@ -36,25 +36,22 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/gejala/{gejala}', [GejalaController::class, 'destroy'])->name('gejala.destroy');
 
     Route::resource('/gejala', GejalaController::class)->except('show')
-        // ->names('gejala')
-        ;
-        // ->names([
-        //     'index' => 'gejala.index',
-        //     'create' => 'gejala.create',
-        //     'store' => 'gejala.store',
-        //     'edit' => 'gejala.edit'
-        // ]);
-    
+        ->names([
+            'index' => 'gejala.index',
+            'create' => 'gejala.create',
+            'store' => 'gejala.store',
+            'edit' => 'gejala.edit'
+        ]);;
+
+
     Route::resource('/dashboard/kerusakan', KerusakanController::class)->except('show')
-        // ->names('kerusakan')
-        ;
-    
+        ->names('kerusakan');
+
     Route::resource('/dashboard/aturan', AturanController::class)->except('show')
-        // ->names('aturan')
-        ;
-    
+        ->names('aturan');
+
     Route::resource('/dashboard/os', OSController::class)->except('show')
-        // ->names('os')
+        ->names('os')
         ->parameters([
             'os' => 'os'
         ]);
@@ -70,4 +67,4 @@ Route::middleware('auth')->group(function () {
 Route::get('/test-aturan', [AturanController::class, 'test']);
 Route::get('/test-konsul', [KonsultasiController::class, 'test']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
