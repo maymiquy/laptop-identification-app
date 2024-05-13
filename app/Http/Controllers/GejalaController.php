@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aturan;
 use App\Models\Gejala;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -18,7 +19,7 @@ class GejalaController extends Controller
     public function index(): Response
     {
         return Inertia::render('Dashboard/Gejala/Index', [
-            'data_gejala' => Gejala::all() 
+            'data_gejala' => Gejala::all()
         ]);
     }
 
@@ -27,7 +28,11 @@ class GejalaController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Dashboard/Gejala/Create');
+        $lastNumberData = Gejala::orderBy('id', 'desc')->first();
+        $lastNumber = $lastNumberData ? (int)explode("G", $lastNumberData->kode_gejala)[1] : 0;
+        $newCode  = 'G' . ($lastNumber + 1);
+
+        return Inertia::render('Dashboard/Gejala/Create', compact('newCode'));
     }
 
     /**
@@ -36,31 +41,26 @@ class GejalaController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
+            'kode_gejala' => 'required',
             'nama_gejala' => 'required|max:255',
-            'pertanyaan' => 'required'
+            'pertanyaan' => 'required',
         ]);
-        
+
         $lastNumberData = Gejala::orderBy('id', 'desc')->first();
         $lastNumber = $lastNumberData ? (int)explode("G", $lastNumberData->kode_gejala)[1] : 0;
-        // $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
 
         $newCode = 'G' . ($lastNumber + 1);
 
+        if ($validatedData['kode_gejala'] != $newCode) {
+            return Redirect::back()->withInput()->with('failed', 'Dilarang merubah kode gejala!');
+        }
+
         $validatedData['uuid'] = Str::uuid()->toString();
-        $validatedData['kode_gejala'] = $newCode;
 
         Gejala::create($validatedData);
-        
-        return Redirect::route('gejala.index');
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    // public function show(Gejala $gejala)
-    // {
-        
-    // }
+        return Redirect::route('gejala.index')->with('success', 'Data gejala berhasil ditambahkan');
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -81,8 +81,8 @@ class GejalaController extends Controller
         ]);
 
         Gejala::where('id', $gejala->id)->update($validatedData);
-        
-        return Redirect::route('gejala.index');
+
+        return Redirect::route('gejala.index')->with('success', "Data gejala: $gejala->kode_gejala berhasil diupate");
     }
 
     /**
@@ -95,7 +95,7 @@ class GejalaController extends Controller
         Aturan::where('next_true', $gejala->kode_gejala)->delete();
         Aturan::where('next_false', $gejala->kode_gejala)->delete();
         Gejala::destroy($gejala->id);
-        
-        return Redirect::route('gejala.index');
+
+        return Redirect::route('gejala.index')->with('success', "Data gejala: $gejala->kode_gejala berhasil dihapus");
     }
 }

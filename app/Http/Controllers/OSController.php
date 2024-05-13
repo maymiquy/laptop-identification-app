@@ -18,16 +18,8 @@ class OSController extends Controller
     public function index(): Response
     {
         return Inertia::render('Dashboard/OS/Index', [
-            'data_os' => OS::all() 
+            'data_os' => OS::all()
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): Response
-    {
-        return Inertia::render('Dashboard/OS/Create');
     }
 
     /**
@@ -42,16 +34,8 @@ class OSController extends Controller
         $validatedData['uuid'] = Str::uuid()->toString();
 
         OS::create($validatedData);
-        
-        return Redirect::route('os.index');
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(OS $os): Response
-    {
-        return Inertia::render('Dashboard/OS/Edit', compact('os'));
+        return Redirect::route('os.index')->with('success', 'Data OS berhasil ditambahkan');
     }
 
     /**
@@ -64,8 +48,8 @@ class OSController extends Controller
         ]);
 
         OS::where('id', $os->id)->update($validatedData);
-        
-        return Redirect::route('os.index');
+
+        return Redirect::route('os.index')->with('success', "Data OS: $os->nama berhasil diupate");
     }
 
     /**
@@ -74,7 +58,7 @@ class OSController extends Controller
     public function destroy(OS $os): RedirectResponse
     {
         OS::destroy($os->id);
-        
-        return Redirect::route('os.index');
+
+        return Redirect::route('os.index')->with('success', "Data OS: $os->nama berhasil dihapus");
     }
 }
