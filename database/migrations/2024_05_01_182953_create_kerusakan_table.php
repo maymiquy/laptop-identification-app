@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->string('kode_kerusakan', 50);
             $table->string('nama_kerusakan');
-            $table->text('gejala');
+            $table->string('gejala');
             $table->text('solusi');
             $table->timestamps();
         });

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('konsultasi', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignId('os_id');
             $table->foreignId('kerusakan_id')->nullable();
             $table->string('nama_lengkap');
             $table->string('email');
+            $table->string('os');
             $table->timestamps();
         });
     }
