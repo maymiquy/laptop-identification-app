@@ -1,19 +1,28 @@
 import { Link, usePage } from "@inertiajs/react";
 import PrimaryButton from "../Components/PrimaryButton";
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, session }) => {
     const { url } = usePage();
 
     return (
         <div className="flex flex-col min-h-screen justify-between py-2 px-6">
             <div className="flex justify-end">
-                {url === "/konsultasi" && (
+                {session && url === "/konsultasi" && (
+                    <Link href="/dashboard">
+                        <PrimaryButton className="px-4 py-2 text-[10px] md:text-xs">
+                            Dashboard
+                        </PrimaryButton>
+                    </Link>
+                )}
+
+                {!session && url === "/konsultasi" && (
                     <Link href="/login">
                         <PrimaryButton className="px-4 py-2 text-[10px] md:text-xs">
                             Login
                         </PrimaryButton>
                     </Link>
                 )}
+
                 {url === "/login" && (
                     <Link href="/konsultasi">
                         <PrimaryButton className="px-4 py-2 text-[10px] md:text-xs">
