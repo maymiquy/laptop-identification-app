@@ -61,8 +61,11 @@ class KonsultasiController extends Controller
             return redirect('/konsultasi')->with('failed', 'Silahkan isi form terlebih dahulu');
         }
 
+        $aturan = Aturan::where('gejala_id', $gejala->id)->first();
+
         return Inertia::render('Konsultasi/Pertanyaan', [
-            'aturan' => Aturan::where('gejala_id', $gejala->id)->first()
+            'aturan' => $aturan,
+            'gejala' => $gejala,
         ]);
     }
 

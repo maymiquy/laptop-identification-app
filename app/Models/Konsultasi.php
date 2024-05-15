@@ -13,15 +13,13 @@ class Konsultasi extends Model
 
     protected $table = 'konsultasi';
 
-    public function getRouteKeyName() {
+    public function getRouteKeyName()
+    {
         return 'uuid';
     }
 
-    public function kerusakan() {
+    public function kerusakan()
+    {
         return $this->belongsTo(Kerusakan::class);
-    }
-
-    public function os() {
-        return $this->belongsTo(OS::class);
     }
 }
