@@ -4,35 +4,13 @@ import NavLink from "./NavLink";
 import Dropdown from "./Dropdown";
 import ResponsiveNavLink from "./ResponsiveNavLink";
 import { useState } from "react";
+import { menuLink } from "../utils/menuLink";
 
 export default function Navbar(props) {
     const { onClick, name, email, isShow } = props;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
-
-    const menuLink = [
-        {
-            title: "Dasboard",
-            link: "dashboard",
-        },
-        {
-            title: "Gejala",
-            link: "gejala.index",
-        },
-        {
-            title: "Kerusakan",
-            link: "gejala.store",
-        },
-        {
-            title: "OS",
-            link: "gejala.create",
-        },
-        {
-            title: "Aturan",
-            link: "gejala.create",
-        },
-    ];
 
     return (
         <nav className="bg-white border-b border-gray-100">
@@ -185,6 +163,7 @@ export default function Navbar(props) {
                 <div className="pt-2 pb-3 space-y-1">
                     {menuLink.map((items, index) => (
                         <ResponsiveNavLink
+                            className="text-sm"
                             key={index}
                             href={route(items.link)}
                             active={route().current(items.link)}
@@ -196,10 +175,10 @@ export default function Navbar(props) {
 
                 <div className="pt-4 pb-1 border-t border-gray-200">
                     <div className="px-4">
-                        <div className="font-medium text-base text-gray-800">
+                        <div className="font-medium text-sm md:text-md text-gray-800">
                             {name}
                         </div>
-                        <div className="font-medium text-sm text-gray-500">
+                        <div className="font-medium text-xs text-gray-500">
                             {email}
                         </div>
                     </div>
@@ -209,6 +188,7 @@ export default function Navbar(props) {
                             method="post"
                             href={route("logout")}
                             as="button"
+                            className="text-sm"
                         >
                             Log Out
                         </ResponsiveNavLink>

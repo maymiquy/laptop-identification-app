@@ -3,7 +3,7 @@ import Navbar from "../Components/Navbar";
 import Sidebar from "../Components/Sidebar";
 import Breadcrumb from "../Components/Breadcrumb";
 
-export default function Dashboard({ user, header, children }) {
+export default function Dashboard({ user, children }) {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [isShow, setIsShow] = useState(false);
     const handleSidebar = () => {
@@ -11,32 +11,26 @@ export default function Dashboard({ user, header, children }) {
         setIsShow((previousState) => !previousState);
     };
     return (
-        <div className="min-h-screen bg-gray-100 flex">
-            <div className="flex-1 flex flex-col">
+        <div className="bg-gray-100 min-h-screen flex relative">
+            <Sidebar
+                sidebarOpen={sidebarOpen}
+                name={user.name}
+                email={user.email}
+            />
+            <div className="flex-1 flex flex-col w-auto">
                 <Navbar
                     name={user.name}
                     email={user.email}
                     onClick={handleSidebar}
                     isShow={isShow}
+                    className="sticky top-0 z-20"
                 />
-
-                <div className="flex flex-1">
-                    <Sidebar
-                        sidebarOpen={sidebarOpen}
-                        name={user.name}
-                        email={user.email}
-                        className="flex-shrink-0"
-                    />
-
-                    <div className="flex flex-col w-full py-2 md:py-4">
-                        <div className="ps-8">
-                            <Breadcrumb className="rounded-md w-fit" />
-                        </div>
-                        <main className="overflow-y-auto md:py-2 md:pe-2">
-                            {children}
-                        </main>
-                    </div>
-                </div>
+                <main className="flex flex-1 flex-col mt-6 px-6 md:px-12">
+                    <Breadcrumb className="rounded-md w-fit" />
+                    <section className="h-screen overflow-y-auto flex-1 md:py-2 md:pe-2">
+                        {children}
+                    </section>
+                </main>
             </div>
         </div>
     );

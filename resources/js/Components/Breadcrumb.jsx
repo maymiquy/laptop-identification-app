@@ -37,11 +37,13 @@ const Breadcrumb = (props) => {
                                 <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z" />
                             </svg>
                             {i === paths.length - 1 ? (
-                                <span className="text-gray-600">{path}</span>
+                                <span className="text-gray-600 uppercase font-semibold text-xs">
+                                    {path}
+                                </span>
                             ) : (
                                 <Link
                                     href={`/${paths.slice(0, i + 1).join("/")}`}
-                                    className="text-gray-600 hover:text-blue-500"
+                                    className="text-gray-600 hover:text-blue-500 uppercase text-xs"
                                 >
                                     {path}
                                 </Link>
