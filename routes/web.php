@@ -34,7 +34,7 @@ Route::resource('/dashboard/os', OSController::class)->except('show')
         'os' => 'os'
     ])->middleware(['auth', 'verified']);
 
-Route::get('/dashboard/konsultasi', [KonsultasiController::class, 'index'])->middleware(['auth', 'verified']);
+Route::get('/dashboard/konsultasi', [KonsultasiController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard.konsultasi.index');
 
 Route::get('/test-aturan', [AturanController::class, 'test']);
 Route::get('/test-konsul', [KonsultasiController::class, 'test']);
