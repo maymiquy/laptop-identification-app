@@ -13,11 +13,13 @@ class Aturan extends Model
 
     protected $table = 'aturan';
 
-    public function getRouteKeyName() {
+    public function getRouteKeyName()
+    {
         return 'kode_aturan';
     }
 
-    public function gejala() {
+    public function gejala()
+    {
         return $this->belongsTo(Gejala::class);
     }
 }

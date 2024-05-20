@@ -15,14 +15,10 @@ class AturanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Gejala $gejala)
     {
-        // return view('dashboard.aturan.index', [
-        //     'data_aturan' => Aturan::with('gejala')->get()
-        // ]);
-
         return Inertia::render('Dashboard/Aturan/Index', [
-            'data_aturan' => Aturan::with('gejala')->latest()->get()
+            "data_aturan" => Aturan::with('gejala')->first()->get(),
         ]);
     }
 

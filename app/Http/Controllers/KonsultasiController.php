@@ -20,7 +20,7 @@ class KonsultasiController extends Controller
     public function index(): Response
     {
         return Inertia::render('Dashboard/Konsultasi/Index', [
-            'data_konsultasi' => Konsultasi::latest()->get()
+            'data_konsultasi' => Konsultasi::first()->get()
         ]);
     }
 
