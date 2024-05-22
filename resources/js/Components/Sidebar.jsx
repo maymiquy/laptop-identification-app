@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "@inertiajs/react";
 import ApplicationLogo from "./ApplicationLogo";
 import { menuLink } from "../utils/menuLink";
+import ResponsiveNavLink from "./ResponsiveNavLink";
 
 export default function Sidebar(props) {
     const { className, sidebarOpen, email, name } = props;
@@ -18,17 +19,20 @@ export default function Sidebar(props) {
                         <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                     </Link>
                     {menuLink.map((items, index) => (
-                        <Link
-                            key={index}
-                            className={`space-y-4 py-2 px-4 justify-center text-sm font-medium border-b w-full ${
-                                route().current(items.link)
-                                    ? "bg-indigo-500 text-zinc-100"
-                                    : "hover:bg-indigo-300 hover:text-zinc-50 focus:bg-indigo-400 focus:text-white"
-                            }`}
-                            href={route(items.link)}
-                        >
-                            <span>{items.title}</span>
-                        </Link>
+                        <>
+                            <ResponsiveNavLink
+                                className="text-sm"
+                                key={index}
+                                href={route(items.link)}
+                                active={route().current(items.link)}
+                            >
+                                {items.title}
+                            </ResponsiveNavLink>
+                            <div
+                                key={items.title}
+                                className="w-full border-b"
+                            />
+                        </>
                     ))}
                 </div>
                 <div className="px-4 py-3 bg-zinc-50 flex items-center justify-center w-full border-t border-gray-200 h-1/3 self-end">
