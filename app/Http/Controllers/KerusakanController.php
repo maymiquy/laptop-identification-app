@@ -20,7 +20,7 @@ class KerusakanController extends Controller
     public function index(): Response
     {
         return Inertia::render('Dashboard/Kerusakan/Index', [
-            'data_kerusakan' => Kerusakan::all()
+            'kerusakan' => Kerusakan::all()
         ]);
     }
 
@@ -116,7 +116,7 @@ class KerusakanController extends Controller
      */
     public function destroy(Kerusakan $kerusakan): RedirectResponse
     {
-        Aturan::where('kerusakan_sebelum', $kerusakan->kode_kerusakan)->delete();
+        Aturan::where('gejala_sebelum', $kerusakan->kode_kerusakan)->delete();
         Aturan::where('next_true', $kerusakan->kode_kerusakan)->delete();
         Aturan::where('next_false', $kerusakan->kode_kerusakan)->delete();
         Kerusakan::destroy($kerusakan->id);

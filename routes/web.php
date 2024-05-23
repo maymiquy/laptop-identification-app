@@ -23,16 +23,39 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/Index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('/dashboard/gejala', GejalaController::class)->except('show')->middleware(['auth', 'verified']);
+Route::resource('/dashboard/gejala', GejalaController::class)->except('show')->middleware(['auth', 'verified'])
+    ->names([
+        'store' => 'dashboard.gejala.store',
+        'edit' => 'dashboard.gejala.edit',
+        'update' => 'dashboard.gejala.update',
+        'destroy' => 'dashboard.gejala.destroy',
+    ]);
 
-Route::resource('/dashboard/kerusakan', KerusakanController::class)->except('show')->middleware(['auth', 'verified']);
+Route::resource('/dashboard/kerusakan', KerusakanController::class)->except('show')->middleware(['auth', 'verified'])
+    ->names([
+        'store' => 'dashboard.kerusakan.store',
+        'edit' => 'dashboard.kerusakan.edit',
+        'update' => 'dashboard.kerusakan.update',
+        'destroy' => 'dashboard.kerusakan.destroy',
+    ]);
 
-Route::resource('/dashboard/aturan', AturanController::class)->except('show')->middleware(['auth', 'verified']);
+
+Route::resource('/dashboard/aturan', AturanController::class)->except('show')->middleware(['auth', 'verified'])
+    ->names([
+        'edit' => 'dashboard.aturan.edit',
+        'destroy' => 'dashboard.aturan.destroy',
+    ]);
+
 
 Route::resource('/dashboard/os', OSController::class)->except('show')
     ->parameters([
         'os' => 'os'
-    ])->middleware(['auth', 'verified']);
+    ])->middleware(['auth', 'verified'])
+    ->names([
+        'edit' => 'dashboard.os.edit',
+        'destroy' => 'dashboard.os.destroy',
+    ]);
+
 
 Route::get('/dashboard/konsultasi', [KonsultasiController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard.konsultasi.index');
 

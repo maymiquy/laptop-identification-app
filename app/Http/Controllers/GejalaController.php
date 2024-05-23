@@ -19,7 +19,7 @@ class GejalaController extends Controller
     public function index(): Response
     {
         return Inertia::render('Dashboard/Gejala/Index', [
-            'data_gejala' => Gejala::all()
+            'gejala' => Gejala::all()
         ]);
     }
 

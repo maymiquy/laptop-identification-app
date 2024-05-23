@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React from "react";
 import Navbar from "../Components/Navbar";
 import Sidebar from "../Components/Sidebar";
 import Breadcrumb from "../Components/Breadcrumb";
 
 export default function DashboardLayout({ user, children }) {
-    const [sidebarOpen, setSidebarOpen] = useState(true);
-    const [isShow, setIsShow] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = React.useState(true);
+    const [isShow, setIsShow] = React.useState(false);
     const handleSidebar = () => {
         setSidebarOpen((previousState) => !previousState);
         setIsShow((previousState) => !previousState);
