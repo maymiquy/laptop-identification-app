@@ -7,12 +7,14 @@ import PrimaryButton from "../../../Components/PrimaryButton";
 import DangerButton from "../../../Components/DangerButton";
 import Modal from "../../../Components/Modal";
 import SecondaryButton from "../../../Components/SecondaryButton";
+import ModalMessage from "../../../Components/ModalMessage";
 
 const Index = () => {
-    const { auth, kerusakan: dataKerusakan } = usePage().props;
+    const { auth, kerusakan: dataKerusakan, flash } = usePage().props;
     const [currentPage, setCurrentPage] = React.useState(1);
     const [kerusakan, setKerusakan] = React.useState(dataKerusakan);
     const [showDeleteModal, setShowDeleteModal] = React.useState(false);
+    const [showMessageModal, setShowMessageModal] = React.useState(false);
     const [deleteKerusakan, setDeleteKerusakan] = React.useState(null);
 
     const itemsPerPage = 10;
@@ -48,6 +50,7 @@ const Index = () => {
                         )
                     );
                     setShowDeleteModal(false);
+                    setShowMessageModal(true);
                 },
                 onError: (error) => {
                     console.error(error);
@@ -56,6 +59,14 @@ const Index = () => {
             }
         );
     };
+
+    React.useEffect(() => {
+        if (flash.success) {
+            setShowMessageModal(true);
+        } else {
+            setShowMessageModal(false);
+        }
+    }, [flash.success]);
 
     return (
         <>
@@ -143,6 +154,12 @@ const Index = () => {
                     </div>
                 </div>
             </DashboardLayout>
+            <ModalMessage
+                message={flash.success}
+                type="success"
+                show={showMessageModal}
+                onClose={() => setShowMessageModal(false)}
+            />
             <Modal
                 show={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
