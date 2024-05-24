@@ -28,7 +28,7 @@ const Create = () => {
                     <div className="max-w-7xl flex-col flex justify-between mx-auto">
                         <div className="bg-white flex flex-col items-center shadow-md space-y-8 rounded-md md:rounded-lg pt-3 pb-6 px-6 md:px-8">
                             <div className="flex flex-col w-full gap-4 py-2 justify-start">
-                                <h1 className="text-2xl">Tambah OS</h1>
+                                <h1 className="text-2xl">Tambah Data OS</h1>
                             </div>
                             <form onSubmit={onSubmit} className="w-full">
                                 <div className="grid grid-cols-1 gap-4">

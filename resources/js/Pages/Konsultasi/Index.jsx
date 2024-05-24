@@ -47,7 +47,7 @@ const Index = () => {
                                         id="nama_lengkap"
                                         type="text"
                                         name="nama_lengkap"
-                                        placeholder="Masukan nama lengkap anda"
+                                        placeholder="Masukkan nama lengkap Anda"
                                         value={data.nama_lengkap}
                                         required
                                         autoComplete="off"
@@ -76,7 +76,7 @@ const Index = () => {
                                         id="email"
                                         type="email"
                                         name="email"
-                                        placeholder="Masukan email anda"
+                                        placeholder="Masukkan email Anda"
                                         value={data.email}
                                         required
                                         autoComplete="off"

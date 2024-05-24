@@ -16,12 +16,14 @@ const Create = () => {
         gejala: [],
     });
 
-    const handleGejalaChange = (gejalaId) => {
+    const handleGejalaChange = (kodeGejala) => {
         setData(
             "gejala",
-            data.gejala.includes(gejalaId)
-                ? data.gejala.filter((id) => id !== gejalaId)
-                : [...data.gejala, gejalaId]
+            data.gejala.includes(kodeGejala)
+                ? data.gejala.filter(
+                      (kode_gejala) => kode_gejala !== kodeGejala
+                  )
+                : [...data.gejala, kodeGejala]
         );
     };
 
@@ -40,7 +42,9 @@ const Create = () => {
                     <div className="max-w-7xl flex-col flex justify-between mx-auto">
                         <div className="bg-white flex flex-col items-center shadow-md space-y-8 rounded-md md:rounded-lg pt-3 pb-6 px-6 md:px-8">
                             <div className="flex flex-col w-full gap-4 py-2 justify-start">
-                                <h1 className="text-2xl">Tambah Kerusakan</h1>
+                                <h1 className="text-2xl">
+                                    Tambah Data Kerusakan
+                                </h1>
                             </div>
                             <form onSubmit={onSubmit} className="w-full">
                                 <div className="grid grid-cols-1 gap-4">
@@ -110,34 +114,38 @@ const Create = () => {
                                             value="Gejala"
                                         />
                                         <div className="grid grid-cols-5 md:grid-cols-10 gap-2 md:gap-4">
-                                            {data_gejala.map((gejala) => (
-                                                <div
-                                                    key={gejala.id}
-                                                    className="flex items-center"
-                                                >
-                                                    <input
-                                                        id={`gejala-${gejala.id}`}
-                                                        name="gejala[]"
-                                                        type="checkbox"
-                                                        value={gejala.id}
-                                                        checked={data.gejala.includes(
-                                                            gejala.id
-                                                        )}
-                                                        onChange={() =>
-                                                            handleGejalaChange(
-                                                                gejala.id
-                                                            )
-                                                        }
-                                                        className="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
-                                                    />
-                                                    <label
-                                                        htmlFor={`gejala-${gejala.id}`}
-                                                        className="ml-2 block text-sm text-gray-700"
+                                            {data_gejala.map(
+                                                (gejala, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="flex items-center"
                                                     >
-                                                        {gejala.kode_gejala}
-                                                    </label>
-                                                </div>
-                                            ))}
+                                                        <input
+                                                            id={`gejala-${gejala.kode_gejala}`}
+                                                            name="gejala[]"
+                                                            type="checkbox"
+                                                            value={
+                                                                gejala.kode_gejala
+                                                            }
+                                                            checked={data.gejala.includes(
+                                                                gejala.kode_gejala
+                                                            )}
+                                                            onChange={() =>
+                                                                handleGejalaChange(
+                                                                    gejala.kode_gejala
+                                                                )
+                                                            }
+                                                            className="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"
+                                                        />
+                                                        <label
+                                                            htmlFor={`gejala-${gejala.kode_gejala}`}
+                                                            className="ml-2 block text-sm text-gray-700"
+                                                        >
+                                                            {gejala.kode_gejala}
+                                                        </label>
+                                                    </div>
+                                                )
+                                            )}
                                         </div>
                                         <InputError
                                             message={errors.gejala}

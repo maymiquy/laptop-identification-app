@@ -30,24 +30,26 @@ const Hasil = () => {
                                             htmlFor="nama_lengkap"
                                             value="Nama Lengkap:"
                                         />
-                                        <pre
+                                        <TextInput
+                                            readOnly
+                                            disabled
                                             id="nama_lengkap"
-                                            className="bg-indigo-50 rounded-md py-2 px-4"
-                                        >
-                                            {konsultasi.nama_lengkap}
-                                        </pre>
+                                            className="bg-zinc-100 w-full rounded-md py-2 px-4"
+                                            value={konsultasi.nama_lengkap}
+                                        />
                                     </div>
                                     <div className="w-1/2">
                                         <InputLabel
                                             htmlFor="email"
                                             value="Email:"
                                         />
-                                        <pre
+                                        <TextInput
+                                            readOnly
+                                            disabled
                                             id="email"
-                                            className="bg-indigo-50 rounded-md py-2 px-4"
-                                        >
-                                            {konsultasi.email}
-                                        </pre>
+                                            className="bg-zinc-100 w-full rounded-md py-2 px-4"
+                                            value={konsultasi.email}
+                                        />
                                     </div>
                                 </div>
 
@@ -56,12 +58,13 @@ const Hasil = () => {
                                         htmlFor="os"
                                         value="Sistem Operasi:"
                                     />
-                                    <pre
+                                    <TextInput
+                                        readOnly
+                                        disabled
                                         id="os"
-                                        className="bg-indigo-50 rounded-md py-2 px-4"
-                                    >
-                                        {konsultasi.os}
-                                    </pre>
+                                        className="bg-zinc-100 w-full rounded-md py-2 px-4"
+                                        value={konsultasi.os}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -72,7 +75,7 @@ const Hasil = () => {
                             />
                             <textarea
                                 id={gejala}
-                                className="bg-indigo-50 rounded-md w-full h-28 border-gray-200 text-gray-700 p-4 resize-none"
+                                className="bg-zinc-100 rounded-md w-full h-28 border-gray-200 text-gray-700 p-4 resize-none"
                                 value={gejala}
                                 disabled
                             ></textarea>
@@ -82,18 +85,19 @@ const Hasil = () => {
                                 htmlFor="kerusakan"
                                 value="Kerusakan yang terdeteksi :"
                             />
-                            <pre
+                            <TextInput
+                                readOnly
+                                disabled
                                 id="kerusakan"
-                                className="bg-indigo-50 rounded-md py-2 px-4"
-                            >
-                                {kerusakan}
-                            </pre>
+                                className="bg-zinc-100 w-full rounded-md py-2 px-4"
+                                value={kerusakan}
+                            />
                         </div>
                         <div>
                             <InputLabel htmlFor={solusi} value="Solusi :" />
                             <textarea
                                 id={solusi}
-                                className="bg-indigo-50 rounded-md w-full h-28 border-gray-200 text-gray-700 p-4 resize-none"
+                                className="bg-zinc-100 rounded-md w-full h-28 border-gray-200 text-gray-700 p-4 resize-none"
                                 value={solusi}
                                 disabled
                             ></textarea>

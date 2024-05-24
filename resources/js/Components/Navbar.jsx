@@ -13,7 +13,7 @@ export default function Navbar(props) {
         useState(false);
 
     return (
-        <nav className="bg-white border-b border-gray-100">
+        <nav className="bg-white border-b border-gray-100 shadow-sm">
             <div className="max-w-7xl mx-auto px-4 md:px-3">
                 <div className="flex justify-between h-16">
                     <div className="shrink-0 flex gap-10 items-center">
@@ -83,18 +83,9 @@ export default function Navbar(props) {
                                         >
                                             {name}
 
-                                            <svg
-                                                className="ms-2 -me-0.5 h-4 w-4"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                            >
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
+                                            <div className="ml-2 -mr-0.5 h-8 w-8 rounded-full flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-700 text-white">
+                                                {name.slice(0, 1)}
+                                            </div>
                                         </button>
                                     </span>
                                 </Dropdown.Trigger>

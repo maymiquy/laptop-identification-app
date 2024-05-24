@@ -8,7 +8,7 @@ const Breadcrumb = (props) => {
 
     return (
         <div
-            className={`bg-white py-2 px-4 flex items-center flex-wrap ${className}`}
+            className={`bg-white py-2 px-4 flex items-center flex-wrap shadow-sm ${className}`}
         >
             <ul className="flex items-center">
                 <li className="inline-flex items-center">
@@ -36,7 +36,11 @@ const Breadcrumb = (props) => {
                                 <path d="M0 0h24v24H0V0z" fill="none" />
                                 <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z" />
                             </svg>
-                            {i === paths.length - 1 ? (
+                            {paths.length > 0 && i === paths.length - 1 ? (
+                                <span className="text-gray-600 uppercase font-semibold text-xs">
+                                    {path}
+                                </span>
+                            ) : paths.length > 3 && i === paths.length - 2 ? (
                                 <span className="text-gray-600 uppercase font-semibold text-xs">
                                     {path}
                                 </span>

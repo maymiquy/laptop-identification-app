@@ -16,10 +16,10 @@ export default function Sidebar(props) {
             <div className="space-y-4 grid grid-flow-row justify-items-center w-full">
                 <div className="flex flex-col justify-center items-center w-full self-start">
                     <Link href="/" className="py-[18.5px]">
-                        <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                        <ApplicationLogo className="block fill-current text-gray-800" />
                     </Link>
                     {menuLink.map((items, index) => (
-                        <>
+                        <React.Fragment key={index}>
                             <ResponsiveNavLink
                                 className="text-sm"
                                 key={index}
@@ -32,7 +32,7 @@ export default function Sidebar(props) {
                                 key={items.title}
                                 className="w-full border-b"
                             />
-                        </>
+                        </React.Fragment>
                     ))}
                 </div>
                 <div className="px-4 py-3 bg-zinc-50 flex items-center justify-center w-full border-t border-gray-200 h-1/3 self-end">

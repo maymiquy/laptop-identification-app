@@ -21,7 +21,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                 <li>
                     <button
                         onClick={handlePrevPage}
-                        className={`px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 ${
+                        className={`px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 shadow-sm ${
                             currentPage === 1
                                 ? "cursor-not-allowed opacity-50"
                                 : "cursor-pointer"
@@ -47,7 +47,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                     <li key={pageNumber}>
                         <button
                             onClick={() => onPageChange(pageNumber)}
-                            className={`border border-gray-300  ${
+                            className={`border border-gray-300 shadow-sm  ${
                                 currentPage === pageNumber
                                     ? "px-4 py-[10px] leading-tight font-bold text-zinc-100 bg-indigo-500 hover:bg-indigo-600 hover:text-white rounded"
                                     : "px-4 py-2 leading-tight font-medium text-gray-700 bg-white hover:bg-gray-100 hover:text-gray-900 "
@@ -60,7 +60,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                 <li>
                     <button
                         onClick={handleNextPage}
-                        className={`px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 ${
+                        className={`px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 shadow-sm ${
                             currentPage === totalPages
                                 ? "cursor-not-allowed opacity-50"
                                 : "cursor-pointer"

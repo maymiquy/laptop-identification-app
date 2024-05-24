@@ -28,13 +28,13 @@ const Create = () => {
 
     return (
         <>
-            <Head title="Aturan - Tambah" />
+            <Head title="Aturan" />
             <DashboardLayout user={auth.user}>
                 <div className="py-4 md:py-6">
                     <div className="max-w-7xl flex-col flex justify-between mx-auto">
                         <div className="bg-white flex flex-col items-center shadow-md space-y-8 rounded-md md:rounded-lg pt-3 pb-6 px-6 md:px-8">
                             <div className="flex flex-col w-full gap-4 py-2 justify-start">
-                                <h1 className="text-2xl">Tambah Aturan</h1>
+                                <h1 className="text-2xl">Tambah Data Aturan</h1>
                             </div>
                             <form onSubmit={onSubmit} className="w-full">
                                 <div className="grid grid-cols-1 gap-4">
@@ -131,7 +131,7 @@ const Create = () => {
                                         <div className="w-auto md:w-1/2">
                                             <InputLabel
                                                 forInput="next_true"
-                                                value="Next True"
+                                                value="JIKA IYA"
                                             />
                                             <select
                                                 id="next_true"
@@ -145,7 +145,7 @@ const Create = () => {
                                                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                             >
                                                 <option disabled selected>
-                                                    Select Jika Tidak
+                                                    Select Jika Iya
                                                 </option>
                                                 <option value="">
                                                     Tidak ada tindakan
@@ -182,7 +182,7 @@ const Create = () => {
                                         <div className="w-auto md:w-1/2">
                                             <InputLabel
                                                 forInput="next_false"
-                                                value="Next False"
+                                                value="JIKA TIDAK"
                                             />
                                             <select
                                                 id="next_false"
