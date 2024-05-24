@@ -39,21 +39,23 @@ Route::resource('/dashboard/kerusakan', KerusakanController::class)->except('sho
         'destroy' => 'dashboard.kerusakan.destroy',
     ]);
 
-
-Route::resource('/dashboard/aturan', AturanController::class)->except('show')->middleware(['auth', 'verified'])
-    ->names([
-        'edit' => 'dashboard.aturan.edit',
-        'destroy' => 'dashboard.aturan.destroy',
-    ]);
-
-
 Route::resource('/dashboard/os', OSController::class)->except('show')
     ->parameters([
         'os' => 'os'
     ])->middleware(['auth', 'verified'])
     ->names([
+        'store' => 'dashboard.os.store',
         'edit' => 'dashboard.os.edit',
+        'update' => 'dashboard.os.update',
         'destroy' => 'dashboard.os.destroy',
+    ]);
+
+Route::resource('/dashboard/aturan', AturanController::class)->except('show')->middleware(['auth', 'verified'])
+    ->names([
+        'store' => 'dashboard.aturan.store',
+        'edit' => 'dashboard.aturan.edit',
+        'update' => 'dashboard.aturan.update',
+        'destroy' => 'dashboard.aturan.destroy',
     ]);
 
 

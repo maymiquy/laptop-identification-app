@@ -18,8 +18,16 @@ class OSController extends Controller
     public function index(): Response
     {
         return Inertia::render('Dashboard/OS/Index', [
-            'data_os' => OS::all()
+            'os' => OS::all()
         ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create(): Response
+    {
+        return Inertia::render('Dashboard/OS/Create');
     }
 
     /**
@@ -36,6 +44,16 @@ class OSController extends Controller
         OS::create($validatedData);
 
         return Redirect::route('os.index')->with('success', 'Data OS berhasil ditambahkan');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(OS $os): Response
+    {
+        return Inertia::render('Dashboard/OS/Edit', [
+            'os' => $os
+        ]);
     }
 
     /**
