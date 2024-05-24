@@ -5,20 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Aturan;
 use App\Models\Gejala;
 use App\Models\Kerusakan;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class AturanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Gejala $gejala)
+    public function index()
     {
         return Inertia::render('Dashboard/Aturan/Index', [
-            "data_aturan" => Aturan::with('gejala')->first()->get(),
+            "aturan" => Aturan::with('gejala')->first()->get(),
+            'gejala' => Gejala::all(),
         ]);
     }
 
@@ -31,11 +34,10 @@ class AturanController extends Controller
         $lastNumber = $lastNumberData ? (int)explode("R", $lastNumberData->kode_aturan)[1] : 0;
         $newCode = 'R' . ($lastNumber + 1);
 
-        $data_gejala = Gejala::all();
-        $data_kerusakan = Kerusakan::all();
+        $gejala = Gejala::all();
+        $aturan = Kerusakan::all();
 
-        // return view('dashboard.aturan.create', compact('newCode', 'data_gejala', 'data_kerusakan'));
-        return Inertia::render('Dashboard/Aturan/Create', compact('newCode', 'data_gejala', 'data_kerusakan'));
+        return Inertia::render('Dashboard/Aturan/Create', compact('newCode', 'gejala', 'aturan'));
     }
 
     /**
@@ -69,19 +71,18 @@ class AturanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Aturan $aturan)
+    public function edit(Aturan $aturan): Response
     {
-        $data_gejala = Gejala::all();
-        $data_kerusakan = Kerusakan::all();
+        $gejala = Gejala::all();
+        $kerusakan = Kerusakan::all();
 
-        // return view('dashboard.aturan.edit', compact('aturan', 'data_gejala', 'data_kerusakan'));
-        return Inertia::render('Dashboard/Aturan/Edit', compact('aturan', 'data_gejala', 'data_kerusakan'));
+        return Inertia::render('Dashboard/Aturan/Edit', compact('aturan', 'gejala', 'kerusakan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Aturan $aturan)
+    public function update(Request $request, Aturan $aturan): RedirectResponse
     {
         $validatedData = $request->validate([
             'gejala_id' => 'required',
